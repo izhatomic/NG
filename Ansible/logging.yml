@@ -1,0 +1,12 @@
+- name: Configure webservers for nginx
+  hosts: monitoring
+  become: True
+  tasks:
+    - name: install elasticsearch
+      apt: name=elasticsearch update_cache=yes
+      when: inventory_hostname == "elastic"
+
+    - name: install kibana
+      apt: name=kibana update_cache=yes
+      when: inventory_hostname == "kibana"
+

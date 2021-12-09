@@ -1,0 +1,12 @@
+- name: Configure webservers for nginx
+  hosts: monitoring
+  become: True
+  tasks:
+    - name: install prometheus
+      apt: name=prometheus update_cache=yes
+      when: inventory_hostname == "prometheus"
+
+    - name: install grafana
+      apt: name=grafana update_cache=yes
+      when: inventory_hostname == "grafana"
+

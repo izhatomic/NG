@@ -1,0 +1,27 @@
+- name: Configure webservers for nginx
+  hosts: webservers
+  become: True
+  vars:
+    nginxlog_link: https://github.com/martin-helmich/prometheus-nginxlog-exporter/releases/download/v1.8.0/prometheus-nginxlog-exporter_1.8.0_linux_amd64.deb
+  tasks:
+    - name: install nginx
+      apt: pkg={{ item }} update_cache=yes
+      become: True
+      with_items:
+        - nginx
+        - prometheus-node-exporter
+        - prometheus-nginx-exporter
+
+    - name: delete default nginx start page
+      file: path=/var/www/html/index.nginx-debian.html state=absent
+
+    - name: copy index page to nginx
+      copy: src=files/index.html dest=/var/www/html/index.html
+
+    - name: Download nginxlog-exporter
+      get_url:
+        url: {{ nginxlog_link }}
+        dest: /tmp/nginxlog.deb
+
+    - name: Installing nginxlog-exporter
+      apt: pkg=/tmp/nginxlog.deb
