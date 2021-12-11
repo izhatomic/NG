@@ -1,23 +1,33 @@
 filebeat.inputs:
 - type: log
   enabled: true
+  encoding: plain
   paths:
     - /var/log/*.log
     - /var/log/nginx/*.log
-	
+
 #============================= Filebeat modules ===============================
 filebeat.config.modules:
   path: ${path.config}/modules.d/*.yml
   reload.enabled: false
 
 #==================== Elasticsearch template setting ==========================
-setup.template.settings:
-  index.number_of_shards: 3
-  
+#setup.template.settings:
+#  index.number_of_shards: 3
+
 #============================== Kibana =====================================
-setup.kibana:
- 
-	
+#setup.kibana:
+
 #----------------------------- Logstash output --------------------------------
 output.logstash:
+  enabled: true
   hosts: ["elastic:5044"]
+
+filebeat.modules:
+- module: nginx
+  access:
+    enabled: true
+    var.paths: ["/var/log/nginx/access.log*"]
+  error:
+    enabled: true
+    var.paths: ["/var/log/nginx/error.log*"]

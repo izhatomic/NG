@@ -1,2 +1,6 @@
 path.data: /var/lib/elasticsearch
 path.logs: /var/log/elasticsearch
+network.host: 0.0.0.0
+node.roles: [ master, data, ingest ]
+cluster.name: netology-logging
+discovery.seed_hosts: [elastic]

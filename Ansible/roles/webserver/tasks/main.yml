@@ -1,9 +1,11 @@
 - name: install nginx and nginx-exporter
-  apt: pkg={{ item }} update_cache=yes
-  become: True
-  with_items:
+  apt: 
+    pkg:
     - nginx
     - prometheus-nginx-exporter
+    - prometheus-nginx-vts-exporter
+    update_cache: yes
+  become: True
 
 - name: delete default nginx start page
   file: path=/var/www/html/index.nginx-debian.html state=absent

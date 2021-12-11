@@ -1,5 +1,13 @@
 ---
 # tasks file for roles/filebeat
+- name: APT - Add elastic.co key
+  apt_key: url="https://artifacts.elastic.co/GPG-KEY-elasticsearch"
+
+- name: Add Elastic repo into source list
+  apt_repository:
+    repo: deb https://artifacts.elastic.co/packages/7.x/apt stable main
+    state: present
+
 - name: Install filebeat from APT repository
   apt: name=filebeat state=present force=true update_cache=yes
 
@@ -19,11 +27,14 @@
   become: true
 
 - name: Configure filebeat modules
-  command: filebeat modules enable  "{{ item }}"
-  args:
-    creates: "/etc/filebeat/modules.d/{{ item }}.yml"
-  with_items: "{{ filebeat_enable_modules }}"
-  notify: restart filebeat
+  shell: filebeat modules enable system nginx
+#  args:
+#    creates: "/etc/filebeat/modules.d/{{ item }}.yml"
+#  with_items: "{{ filebeat_enable_modules }}"
+#  notify: restart filebeat
+
+- name: make dashboards for kibana
+  shell: filebeat setup --dashboards
 
 - name: Force systemd to reread configs
   systemd: daemon_reload=yes
