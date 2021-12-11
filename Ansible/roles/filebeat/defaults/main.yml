@@ -1,0 +1,5 @@
+---
+# defaults file for roles/filebeat
+filebeat_enable_modules:
+  - system
+  - nginx

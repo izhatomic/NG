@@ -1,0 +1,28 @@
+---
+# tasks file for roles/logstash
+- name: APT - Add elastic.co key
+  apt_key: url="https://artifacts.elastic.co/GPG-KEY-elasticsearch"
+
+- name: Add Elastic repo into source list
+  apt_repository:
+    repo: deb https://artifacts.elastic.co/packages/7.x/apt stable main
+    state: present
+    update_cache=yes
+
+- name: Install Logstash
+  apt: name=logstash state=present force=true update_cache=yes
+	
+- name: Copy config
+  template: src=logstashConf.j2 dest=/etc/logstash/conf.d/logstash.conf
+	
+- name: Force systemd to reread configs
+  systemd: daemon_reload=yes
+	
+- name: Enable logstash.service
+  systemd:
+    name: logstash.service
+    enabled: yes
+  
+- name: Start logstash.service
+  systemd: name=logstash.service state=restarted
+  become: true

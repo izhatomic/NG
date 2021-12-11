@@ -1,0 +1,29 @@
+- name: install nginx
+  apt: pkg={{ item }} update_cache=yes
+  become: True
+  with_items:
+    - nginx
+    - prometheus-nginx-exporter
+
+- name: delete default nginx start page
+  file: path=/var/www/html/index.nginx-debian.html state=absent
+
+- name: copy index page to nginx
+  template: src=index.j2 dest=/var/www/html/index.html
+
+#- name: Download nginxlog-exporter
+#  get_url:
+#    url: {{ nginxlog_link }}
+#    dest: /tmp/nginxlog.deb
+
+#- name: Installing nginxlog-exporter
+#  apt: pkg=/tmp/nginxlog.deb
+
+- name: wait for service up
+  uri:
+    url: "http://127.0.0.1:80"
+    status_code: 200
+  register: __result
+  until: __result.status == 200
+  retries: 120
+  delay: 1

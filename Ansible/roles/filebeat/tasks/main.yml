@@ -1,0 +1,33 @@
+---
+# tasks file for roles/filebeat
+- name: Install filebeat from APT repository
+  apt: name=filebeat state=present force=true update_cache=yes
+	
+- name: Copy config
+  template: src=filebeatConf.j2 dest=/etc/filebeat/filebeat.yml
+ 
+- name: Force systemd to reread configs
+  systemd: daemon_reload=yes
+	
+- name: Enable filebeat.service
+  systemd:
+    name: filebeat.service
+    enabled: yes
+	
+- name: Start filebeat.service
+  systemd: name=filebeat.service state=restarted
+  become: true
+
+- name: Configure filebeat modules
+  command: filebeat modules enable  "{{ item }}"
+  args:
+    creates: "/etc/filebeat/modules.d/{{ item }}.yml"
+  with_items: "{{ filebeat_enable_modules }}"
+  notify: restart filebeat
+
+- name: Force systemd to reread configs
+  systemd: daemon_reload=yes
+
+- name: Start filebeat.service
+  systemd: name=filebeat.service state=restarted
+  become: true

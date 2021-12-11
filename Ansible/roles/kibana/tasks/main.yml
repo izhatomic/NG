@@ -1,0 +1,28 @@
+---
+# tasks file for roles/kibana
+- name: APT - Add elastic.co key
+  apt_key: url="https://artifacts.elastic.co/GPG-KEY-elasticsearch"
+
+- name: Add Elastic repo into source list
+  apt_repository:
+    repo: deb https://artifacts.elastic.co/packages/7.x/apt stable main
+    state: present
+    update_cache=yes
+
+- name: Install kibana
+  apt: name=kibana state=present force=yes update_cache=yes
+	
+- name: Copy config
+  template: src=kibanaConf.j2 dest=/etc/kibana/kibana.yml
+  
+- name: Force systemd to reread configs
+  systemd: daemon_reload=yes
+  
+- name: Enable kibana.service
+  systemd:
+    name: kibana.service
+    enabled: yes
+  
+- name: Start kibana.service
+  systemd: name=kibana.service state=restarted
+  become: true
