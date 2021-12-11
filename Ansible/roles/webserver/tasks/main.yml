@@ -1,4 +1,4 @@
-- name: install nginx
+- name: install nginx and nginx-exporter
   apt: pkg={{ item }} update_cache=yes
   become: True
   with_items:

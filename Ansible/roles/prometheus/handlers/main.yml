@@ -5,7 +5,9 @@
     name: prometheus
     state: restarted
     enabled: yes
-    daemon_reload: yes- name: reload_prometheus
+    daemon_reload: yes
+
+- name: reload_prometheus
   uri:
     url: http://localhost:9090/-/reload
     method: POST
