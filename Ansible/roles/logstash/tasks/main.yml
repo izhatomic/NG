@@ -19,12 +19,12 @@
 - name: Copy logstash config
   template: src=logstashConf.j2 dest=/etc/logstash/logstash.conf
 
-- name: Change ownership of a logstash directory
-  ansible.builtin.file:
-    path: /etc/logstash/
-    state: directory
-    recurse: yes
-    owner: logstash
+#- name: Change ownership of a logstash directory
+#  ansible.builtin.file:
+#    path: /etc/logstash/
+#    state: directory
+#    recurse: yes
+#    owner: logstash
 
 - name: Force systemd to reread configs
   systemd: daemon_reload=yes

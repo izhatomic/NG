@@ -33,8 +33,8 @@
 #  with_items: "{{ filebeat_enable_modules }}"
 #  notify: restart filebeat
 
-- name: make dashboards for kibana
-  shell: filebeat setup --dashboards
+#- name: make dashboards for kibana
+#  shell: filebeat setup --dashboards
 
 - name: Force systemd to reread configs
   systemd: daemon_reload=yes

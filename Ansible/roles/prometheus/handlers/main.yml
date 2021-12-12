@@ -9,10 +9,10 @@
 
 - name: reload_prometheus
   uri:
-    url: http://localhost:9090/
+    url: http://prometheus:9090/
     method: POST
-    status_code: 200
+    status_code: 302
   register: __result
-  until: __result.status == 200
+  until: __result.status == 302
   retries: 120
-  delay: 1
+  delay: 10
