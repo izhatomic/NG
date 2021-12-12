@@ -41,15 +41,15 @@ resource "yandex_compute_instance" "vm1" {
   }
 
   network_interface {
-#    subnet_id = yandex_vpc_subnet.subnet_1.id
-    subnet_id = "e9bqstrd9l7dpc6g3l3e"
+    subnet_id = yandex_vpc_subnet.subnet_1.id
+#    subnet_id = "e9bqstrd9l7dpc6g3l3e"
 #    subnet_id = "b0c3eh2qaofainqtrg4o"
     nat       = true
   }
 
   metadata = {
-    ssh-keys = "${var.username}:${file(${var.public_key_path})}"
-    user-data = "${file("users.txt")}"
+    ssh-keys = "${var.username}:${file("~/.ssh/id_rsa.pub")}"
+    user-data = "${file("users.yml")}"
   }
 }
 
