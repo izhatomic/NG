@@ -13,13 +13,13 @@
 - name: copy index page to nginx
   template: src=index.j2 dest=/var/www/html/index.html
 
-- name: Download nginxlog-exporter
-  get_url:
-    url: {{ nginxlog_link }}
-    dest: /tmp/nginxlog.deb
+- name: take read access for nginx access.log
+  ansible.builtin.file:
+    path: /var/log/nginx/access.log
+    mode: '0644'
 
 - name: Installing nginxlog-exporter
-  apt: pkg=/tmp/nginxlog.deb
+  apt: deb="{{ nginxlog_link }}"
 
 - name: Delete default nginxlog-exporter config
   ansible.builtin.file:
@@ -36,10 +36,10 @@
 
 - name: wait for nginxlog-exporter up
   uri:
-    url: "http://127.0.0.1:4040"
-    status_code: 302
+    url: "http://127.0.0.1:4040/metrics"
+    status_code: 200
   register: __result
-  until: __result.status == 302
+  until: __result.status == 200
   retries: 12 
   delay: 10
 
