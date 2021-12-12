@@ -11,13 +11,22 @@
 - name: Install Logstash
   apt: name=logstash state=present force=true update_cache=yes
 
-- name: Delete default config
-  ansible.builtin.file:
-    path: /etc/logstash/logstash.yml
-    state: absent
+#- name: Delete default config
+#  ansible.builtin.file:
+#    path: /etc/logstash/logstash.yml
+#    state: absent
 
-- name: Copy logstash config
-  template: src=logstashConf.j2 dest=/etc/logstash/logstash.conf
+#- name: Copy logstash config
+#  template: src=logstashConf.j2 dest=/etc/logstash/logstash.conf
+
+- name: Copy logstash input.conf
+  template: src=input.conf.j2 dest=/etc/logstash/conf.d/input.conf
+
+- name: Copy logstash output.conf
+  template: src=output.conf.j2 dest=/etc/logstash/conf.d/output.conf
+
+- name: Copy logstash filter.conf
+  template: src=filter.conf.j2 dest=/etc/logstash/conf.d/filter.conf
 
 #- name: Change ownership of a logstash directory
 #  ansible.builtin.file:
