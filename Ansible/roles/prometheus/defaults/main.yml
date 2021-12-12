@@ -4,7 +4,7 @@ prometheus_dir_configuration: "/etc/prometheus"
 prometheus_retention_time: "365d"
 prometheus_scrape_interval: "30s"
 prometheus_node_exporter: true
-prometheus_node_exporter_group: "all"
+prometheus_node_exporter_group: "webservers"
 prometheus_env: "production"
 prometheus_var_config:
   global:
