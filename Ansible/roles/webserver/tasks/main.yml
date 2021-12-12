@@ -29,10 +29,9 @@
 - name: Make config for nginxlog-exporter
   template: src=prometheus-nginxlog-exporter.hcl.j2 dest=/etc/prometheus-nginxlog-exporter.hcl
 
-- name: Reload nginxlog-exporter
-  ansible.builtin.systemd:
-    name: prometheus-nginxlog-exporter.service
-    state: reloaded
+- name: Restart prometheus-nginxlog-exporter.service
+  systemd: name=prometheus-nginxlog-exporter.service state=restarted
+  become: true
 
 - name: wait for nginxlog-exporter up
   uri:
