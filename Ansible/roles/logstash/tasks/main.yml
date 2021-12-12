@@ -11,8 +11,20 @@
 - name: Install Logstash
   apt: name=logstash state=present force=true update_cache=yes
 
-- name: Copy config
-  template: src=logstashConf.j2 dest=/etc/logstash/conf.d/logstash.conf
+- name: Delete default config
+  ansible.builtin.file:
+    path: /etc/logstash/logstash.yml
+    state: absent
+
+- name: Copy logstash config
+  template: src=logstashConf.j2 dest=/etc/logstash/logstash.conf
+
+- name: Change ownership of a logstash directory
+  ansible.builtin.file:
+    path: /etc/logstash/
+    state: directory
+    recurse: yes
+    owner: logstash
 
 - name: Force systemd to reread configs
   systemd: daemon_reload=yes
