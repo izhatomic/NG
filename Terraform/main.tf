@@ -8,9 +8,9 @@ terraform {
 }
 
 provider "yandex" {
-  token     = "AQAAAAABZgLiAATuwZCa5yregkOCjtEhFlIVi1U"
-  cloud_id  = "b1gbfmcnli0qbnh558o8"
-  folder_id = "b1gcb5c8lbq0p898u2lg"
+  token     = var.oauth_token
+  cloud_id  = var.cloud_id
+  folder_id = var.folder_id
   zone      = "ru-central1-c"
 }
 
@@ -36,7 +36,7 @@ resource "yandex_compute_instance" "vm1" {
 
   boot_disk {
     initialize_params {
-      image_id = "fd8ot0k0vde438jv0t8j"
+      image_id = var.image_id
     }
   }
 
@@ -48,7 +48,7 @@ resource "yandex_compute_instance" "vm1" {
   }
 
   metadata = {
-    ssh-keys = "ubuntu:${file("~/.ssh/id_rsa.pub")}"
+    ssh-keys = "${var.username}:${file(${var.public_key_path})}"
     user-data = "${file("users.txt")}"
   }
 }
