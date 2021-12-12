@@ -7,5 +7,6 @@
   - targets:
 {% for server in groups[prometheus_node_exporter_group] %}
     - {{ server }}:9100
+    - {{ server }}:4040
 {% endfor %}
 {% endif %}

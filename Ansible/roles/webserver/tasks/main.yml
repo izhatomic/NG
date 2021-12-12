@@ -13,19 +13,41 @@
 - name: copy index page to nginx
   template: src=index.j2 dest=/var/www/html/index.html
 
-#- name: Download nginxlog-exporter
-#  get_url:
-#    url: {{ nginxlog_link }}
-#    dest: /tmp/nginxlog.deb
+- name: Download nginxlog-exporter
+  get_url:
+    url: {{ nginxlog_link }}
+    dest: /tmp/nginxlog.deb
 
-#- name: Installing nginxlog-exporter
-#  apt: pkg=/tmp/nginxlog.deb
+- name: Installing nginxlog-exporter
+  apt: pkg=/tmp/nginxlog.deb
 
-- name: wait for service up
+- name: Delete default nginxlog-exporter config
+  ansible.builtin.file:
+    path: /etc/prometheus-nginxlog-exporter.hcl
+    state: absent
+
+- name: Make config for nginxlog-exporter
+  template: src=prometheus-nginxlog-exporter.hcl.j2 dest=/etc/prometheus-nginxlog-exporter.hcl
+
+- name: Reload nginxlog-exporter
+  ansible.builtin.systemd:
+    name: prometheus-nginxlog-exporter.service
+    state: reloaded
+
+- name: wait for nginxlog-exporter up
+  uri:
+    url: "http://127.0.0.1:4040"
+    status_code: 302
+  register: __result
+  until: __result.status == 302
+  retries: 12 
+  delay: 10
+
+- name: wait for nginx up
   uri:
     url: "http://127.0.0.1:80"
     status_code: 200
   register: __result
   until: __result.status == 200
-  retries: 120
-  delay: 1
+  retries: 12
+  delay: 10
