@@ -1,0 +1,16 @@
+variable "oauth_token" {
+    type = string
+    default = "AQAAAAABZgLiAATuwZCa5yregkOCjtEhFlIVi1qU"
+}
+variable "cloud_id" {
+    type = string
+    default = "b1gbfmcnli0qbnh558o18"
+}
+variable "folder_id" {
+    type = string
+    default = "b1gcb5c8lbq0p898u2leg"
+}
+variable "service_account_id" {
+    type = string
+    default = "b1gbfmcnli0qbnh558o38"
+}
