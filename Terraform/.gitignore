@@ -1,6 +1,0 @@
-private-variables.tf
-.terrafor*
-terraform.tfstat*
-*.swp
-*.tfstate
-*.backup
