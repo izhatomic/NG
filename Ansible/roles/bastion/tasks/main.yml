@@ -1,0 +1,21 @@
+---
+# tasks file for roles/bastion
+- name: install packages
+  apt:
+    pkg:
+    - git
+    - ansible
+    - python3
+    update_cache: yes
+
+- name: get repo
+  ansible.builtin.git:
+    repo: {{ repo }}/{{ user}}/{{ proj }}.git
+    dest: ~/
+    single_branch: yes
+    version: {{ branch }}
+
+- name: deploy servers
+  ansible.builtin.shell:
+    cmd: ansible-playbook bastion-playbook.yml
+    chdir: ~/{{ proj }}/Ansible

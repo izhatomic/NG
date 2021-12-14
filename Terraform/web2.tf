@@ -6,6 +6,7 @@ resource "yandex_compute_instance" "web2" {
 
   labels = {
     group = "webservers"
+    vds   = "web2"
   }
 
   resources {

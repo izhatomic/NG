@@ -1,18 +1,18 @@
-resource "yandex_compute_instance" "web1" {
-  name        = "web1"
-  hostname    = "web1"
+resource "yandex_compute_instance" "grafana" {
+  name        = "grafana"
+  hostname    = "grafana"
   platform_id = "standard-v1"
-  zone        = "ru-central1-a"
+  zone        = "ru-central1-c"
 
   labels = {
-    group = "webservers"
-    vds   = "web1"
+    group = "monitoring"
+    vds   = "grafana"
   }
 
   resources {
     cores  = 2
-    memory = 1
-    core_fraction = 5
+    memory = 8
+    core_fraction = 100
   }
 
   boot_disk {
@@ -22,12 +22,11 @@ resource "yandex_compute_instance" "web1" {
   }
 
   network_interface {
-    subnet_id = yandex_vpc_subnet.subnet-a.id
+    subnet_id = yandex_vpc_subnet.subnet-c.id
     nat       = true
   }
 
   metadata = {
     ssh-keys  = "${var.username}:${file(var.public_key_path)}"
-    user-data = "${file("users.yml")}"
   }
 }
