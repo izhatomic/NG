@@ -7,7 +7,7 @@ resource "yandex_alb_target_group" "webservers" {
   }
 
   target {
-    subnet_id = "${yandex_vpc_subnet.subnet-a.id}"
+    subnet_id = "${yandex_vpc_subnet.subnet-b.id}"
     ip_address   = "${yandex_compute_instance.web2.network_interface.0.ip_address}"
   }
 }

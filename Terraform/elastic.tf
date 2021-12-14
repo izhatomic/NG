@@ -23,7 +23,7 @@ resource "yandex_compute_instance" "elastic" {
 
   network_interface {
     subnet_id = yandex_vpc_subnet.subnet-b.id
-    nat       = true
+    nat = true
   }
 
   metadata = {

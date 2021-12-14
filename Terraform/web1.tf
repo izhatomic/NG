@@ -23,7 +23,7 @@ resource "yandex_compute_instance" "web1" {
 
   network_interface {
     subnet_id = yandex_vpc_subnet.subnet-a.id
-    nat       = true
+    nat_ip_address = true
   }
 
   metadata = {
