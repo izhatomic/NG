@@ -1,7 +1,7 @@
 # Terraform
 Terraform/private-variables.tf
-Terraform/.terrafor*
-Terraform/terraform.tfstat*
+Terraform/.*
+Terraform/*.tfstate
 Terraform/*.swp
 Terraform/*.tfstate
 Terraform/*.backup
