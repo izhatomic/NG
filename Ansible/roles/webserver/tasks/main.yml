@@ -14,7 +14,7 @@
   template: src=index.j2 dest=/var/www/html/index.html
 
 - name: take read access for nginx access.log
-  ansible.builtin.file:
+  file:
     path: /var/log/nginx/access.log
     mode: '0644'
 
@@ -22,7 +22,7 @@
   apt: deb="{{ nginxlog_link }}"
 
 - name: Delete default nginxlog-exporter config
-  ansible.builtin.file:
+  file:
     path: /etc/prometheus-nginxlog-exporter.hcl
     state: absent
 

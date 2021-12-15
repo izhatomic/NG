@@ -9,13 +9,11 @@
     update_cache: yes
 
 - name: get repo
-  ansible.builtin.git:
+  git:
     repo: "{{ repo }}/{{ user}}/{{ proj }}.git"
-    dest: ~/
-    single_branch: yes
-    version: "{{ branch }}"
+    dest: "~/{{ proj }}/"
 
 - name: deploy servers
-  ansible.builtin.shell:
+  shell:
     cmd: ansible-playbook bastion-playbook.yml
     chdir: "~/{{ proj }}/Ansible"
