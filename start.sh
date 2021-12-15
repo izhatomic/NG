@@ -7,6 +7,13 @@ BOLD='\e[1m'
 BLUE='\e[34m'
 END='\e[0m'
 
+echo -e "${BOLD}${BLUE}Preparing...${END}"
+if [[ -z $(which jq) ]]
+then
+    sudo apt update
+    sudo apt install jq -y
+fi
+
 echo -e "${BOLD}${BLUE}Generate new ssh-key...${END}"
 
 ssh-keygen -q -t rsa -b 4096 -f ~/.ssh/yandex-cloud -N ""
