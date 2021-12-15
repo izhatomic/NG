@@ -24,7 +24,7 @@ echo -e "\n${BOLD}${GREEN}[INFORM]:${END} bastion_host IP set to ${BOLD}$BASTION
 
 echo -e "${BOLD}${BLUE}Copy ssh-key to bastion host...${END}"
 
-cat ~/.ssh/id_rsa.pub | ssh -i ~/.ssh/yandex-cloud ubuntu@${BASTION_IP} 'cat >> .ssh/authorized_keys
+cat ~/.ssh/id_rsa.pub | ssh -i ~/.ssh/yandex-cloud ubuntu@${BASTION_IP} 'cat >> .ssh/authorized_keys'
 scp ~/.ssh/yandex-cloud ubuntu@${BASTION_IP}:~/.ssh/id_rsa
 scp ~/.ssh/yandex-cloud.pub ubuntu@${BASTION_IP}:~/.ssh/id_rsa.pub
 
