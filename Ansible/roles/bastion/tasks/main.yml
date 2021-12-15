@@ -10,12 +10,12 @@
 
 - name: get repo
   ansible.builtin.git:
-    repo: {{ repo }}/{{ user}}/{{ proj }}.git
+    repo: "{{ repo }}/{{ user}}/{{ proj }}.git"
     dest: ~/
     single_branch: yes
-    version: {{ branch }}
+    version: "{{ branch }}"
 
 - name: deploy servers
   ansible.builtin.shell:
     cmd: ansible-playbook bastion-playbook.yml
-    chdir: ~/{{ proj }}/Ansible
+    chdir: "~/{{ proj }}/Ansible"
