@@ -24,6 +24,7 @@ resource "yandex_compute_instance" "grafana" {
   network_interface {
     subnet_id = yandex_vpc_subnet.subnet-c.id
     nat       = true
+    security_group_ids = [ yandex_vpc_security_group.sec-group.id ]
   }
 
   metadata = {

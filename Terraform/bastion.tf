@@ -17,13 +17,14 @@ resource "yandex_compute_instance" "bastion" {
 
   boot_disk {
     initialize_params {
-      image_id = var.image_id
+      image_id = var.image_id_bastion
     }
   }
 
   network_interface {
     subnet_id = yandex_vpc_subnet.subnet-c.id
     nat       = true
+    security_group_ids = [ yandex_vpc_security_group.sec-group.id ]
   }
 
   metadata = {

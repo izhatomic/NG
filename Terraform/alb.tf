@@ -5,8 +5,8 @@ resource "yandex_alb_load_balancer" "alb" {
 
   allocation_policy {
     location {
-      zone_id   = "ru-central1-a"
-      subnet_id = yandex_vpc_subnet.subnet-a.id 
+      zone_id   = "ru-central1-c"
+      subnet_id = yandex_vpc_subnet.subnet-c.id 
     }
   }
 

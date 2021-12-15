@@ -23,7 +23,8 @@ resource "yandex_compute_instance" "prometheus" {
 
   network_interface {
     subnet_id = yandex_vpc_subnet.subnet-b.id
-    nat = true
+    nat_ip_address = true
+    security_group_ids = [ yandex_vpc_security_group.sec-group.id ]
   }
 
   metadata = {
