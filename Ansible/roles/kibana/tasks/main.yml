@@ -3,10 +3,14 @@
 - name: APT - Add elastic repo key
   apt_key: url="https://artifacts.elastic.co/GPG-KEY-elasticsearch"
 
-- name: Add Elastic repo into source list
-  apt_repository:
-    repo: deb https://artifacts.elastic.co/packages/7.x/apt stable main
-    state: present
+#- name: Add Elastic repo into source list
+#  apt_repository:
+#    repo: deb https://artifacts.elastic.co/packages/7.x/apt stable main
+#    state: present
+
+- name: Add repo to source list
+  shell: echo "deb https://artifacts.elastic.co/packages/7.x/apt stable main" >> /etc/apt/sources.list
+  become: true
 
 - name: Install kibana
   apt: name=kibana state=present force=yes update_cache=yes

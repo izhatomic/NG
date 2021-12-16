@@ -12,18 +12,22 @@
     url: "https://packages.grafana.com/gpg.key"
     validate_certs: no
 
-- name: add repository
-  apt_repository:
-    repo: "deb https://packages.grafana.com/oss/deb stable main"             
-    state: present
-    validate_certs: no
+#- name: add repository
+#  apt_repository:
+#    repo: "deb https://packages.grafana.com/oss/deb stable main"             
+#    state: present
+#    validate_certs: no
+
+- name: Add repo to source list
+  shell: echo "deb https://packages.grafana.com/oss/deb stable main" >> /etc/apt/sources.list
+  become: true
+
 
 - name: install grafana
   apt:
     name: grafana
     state: latest
     update_cache: yes
-    cache_valid_time: 3600
 
 - name: start service grafana-server
   systemd:

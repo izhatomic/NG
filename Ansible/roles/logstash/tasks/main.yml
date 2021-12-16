@@ -3,10 +3,10 @@
 - name: APT - Add elastic repo key
   apt_key: url="https://artifacts.elastic.co/GPG-KEY-elasticsearch"
 
-- name: Add Elastic repo into source list
-  apt_repository:
-    repo: deb https://artifacts.elastic.co/packages/7.x/apt stable main
-    state: present
+#- name: Add Elastic repo into source list
+#  apt_repository:
+#    repo: deb https://artifacts.elastic.co/packages/7.x/apt stable main
+#    state: present
 
 - name: Install Logstash
   apt: name=logstash state=present force=true update_cache=yes

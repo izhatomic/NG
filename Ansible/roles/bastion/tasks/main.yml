@@ -9,6 +9,14 @@
     update_cache: yes
   become: true
 
+- name: Copy ssh private key to root
+  shell:
+    cmd: "sudo cp /home/{{ ssh_ansible_user }}/.ssh/id_rsa /root/.ssh/"
+
+- name: Copy ssh public key to root
+  shell:
+    cmd: "sudo cp /home/{{ ssh_ansible_user }}/.ssh/id_rsa.pub /root/.ssh/" 
+
 - name: get repo
   git:
     repo: "{{ repo }}/{{ user}}/{{ proj }}.git"
