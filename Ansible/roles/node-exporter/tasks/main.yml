@@ -4,8 +4,6 @@
   apt:
     pkg:
     - prometheus-node-exporter
-    - python
-    - python3
     update_cache: yes
   become: True
 

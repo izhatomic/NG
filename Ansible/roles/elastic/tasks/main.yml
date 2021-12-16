@@ -1,13 +1,6 @@
 ---
 # tasks file for roles/elastic
-- name: install packages
-  apt:
-    pkg:
-    - python 
-    - python3
-    update_cache: yes
-
-- name: APT - Add elastic.co key
+- name: APT - Add elastic repo key
   apt_key: url="https://artifacts.elastic.co/GPG-KEY-elasticsearch" 
 
 - name: Add Elastic repo into source list

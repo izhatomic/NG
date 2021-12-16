@@ -4,8 +4,6 @@
   apt:
     pkg:
     - prometheus
-    - python
-    - python3
     update_cache: yes
 
 - name: prometheus args

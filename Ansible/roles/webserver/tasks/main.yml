@@ -4,8 +4,6 @@
     - nginx
     - prometheus-nginx-exporter
     - prometheus-nginx-vts-exporter
-    - python
-    - python3
     update_cache: yes
   become: True
 

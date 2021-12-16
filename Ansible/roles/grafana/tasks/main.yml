@@ -5,10 +5,7 @@
     pkg:
     - gnupg
     - software-properties-common
-    - python
-    - python3
     update_cache: yes
-    become: true
 
 - name: add gpg hey
   apt_key:
