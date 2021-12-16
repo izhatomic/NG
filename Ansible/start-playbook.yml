@@ -1,6 +1,6 @@
 - name: install bastion host
   hosts: bastion
-  become: true
+#  become: true
   tags:
   - bastion
   roles:
