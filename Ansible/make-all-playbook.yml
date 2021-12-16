@@ -1,7 +1,0 @@
-- name: install bastion host
-  hosts: bastion
-#  become: true
-  tags:
-  - bastion
-  roles:
-  - bastion

@@ -1,6 +1,0 @@
----
-# defaults file for roles/bastion
-repo: https://github.com
-user: izhatomic
-proj: NG
-branch: master

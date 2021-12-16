@@ -11,18 +11,10 @@
 
 - name: Copy ssh private key to root
   shell:
-    cmd: "sudo cp /home/{{ ssh_ansible_user }}/.ssh/id_rsa /root/.ssh/"
+    cmd: "cp /home/{{ ssh_ansible_user }}/.ssh/id_rsa /root/.ssh/"
+  become: true
 
 - name: Copy ssh public key to root
   shell:
-    cmd: "sudo cp /home/{{ ssh_ansible_user }}/.ssh/id_rsa.pub /root/.ssh/" 
-
-- name: get repo
-  git:
-    repo: "{{ repo }}/{{ user}}/{{ proj }}.git"
-    dest: "~/{{ proj }}/"
-
-- name: deploy servers
-  shell:
-    cmd: ansible-playbook bastion-playbook.yml
-    chdir: "~/{{ proj }}/Ansible"
+    cmd: "cp /home/{{ ssh_ansible_user }}/.ssh/id_rsa.pub /root/.ssh/" 
+  become: true

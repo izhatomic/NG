@@ -37,4 +37,6 @@ scp ~/.ssh/yandex-cloud.pub ubuntu@${BASTION_IP}:~/.ssh/id_rsa.pub
 
 echo -e "${BOLD}${BLUE}Start Ansible...${END}"
 cd ../Ansible
-ansible-playbook make-all-playbook.yml -e bastion_host=$BASTION_IP
+ansible-playbook start-playbook.yml -e bastion_host=$BASTION_IP
+ssh -o "StrictHostKeyChecking=no" -i ~/.ssh/yandex-cloud ubuntu@${BASTION_IP} -t 'git clone https://github.com/izhatomic/NG.git'
+ssh -o "StrictHostKeyChecking=no" -i ~/.ssh/yandex-cloud ubuntu@${BASTION_IP} -t 'cd NG/Ansible/ && ansible-playbook bastion-playbook.yml'
