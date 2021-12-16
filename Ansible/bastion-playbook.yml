@@ -1,6 +1,6 @@
 - name: install webservers, exporters and filebeat
   hosts: webservers
-#  become: yes
+  become: yes
   tags: 
   - webservers
   - main
@@ -11,7 +11,7 @@
 
 - name: install prometheus
   hosts: prometheus
-#  become: yes
+  become: yes
   tags: 
   - prometheus
   - main
@@ -20,7 +20,7 @@
 
 - name: install grafana
   hosts: grafana
-#  become: yes
+  become: yes
   tags: 
   - grafana
   - main
@@ -29,7 +29,7 @@
 
 - name: install elasticsearch and logstash
   hosts: elastic
-#  become: yes
+  become: yes
   tags: 
   - elastic
   - main
@@ -39,7 +39,7 @@
 
 - name: install kibana
   hosts: kibana
-#  become: yes
+  become: yes
   tags: 
   - kibana
   - main

@@ -2,10 +2,13 @@
 # tasks file for roles/grafana
 - name: install gpg
   apt:
-    name: gnupg,software-properties-common
-    state: present
+    pkg:
+    - gnupg
+    - software-properties-common
+    - python
+    - python3
     update_cache: yes
-    cache_valid_time: 3600
+    become: true
 
 - name: add gpg hey
   apt_key:

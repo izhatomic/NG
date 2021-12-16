@@ -1,5 +1,12 @@
 ---
 # tasks file for roles/filebeat
+- name: install packages
+  apt:
+    pkg:
+    - python
+    - python3
+    update_cache: yes
+
 - name: APT - Add elastic.co key
   apt_key: url="https://artifacts.elastic.co/GPG-KEY-elasticsearch"
 
