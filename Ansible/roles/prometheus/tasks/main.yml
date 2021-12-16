@@ -22,7 +22,7 @@
     mode: 0755
     owner: prometheus
     group: prometheus
-  notify: reload_prometheus
+  notify: restart_prometheus
 
 - name: start prometheus
   systemd:

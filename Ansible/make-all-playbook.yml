@@ -2,6 +2,6 @@
   hosts: bastion
 #  become: true
   tags:
-  - ingress_host
+  - bastion
   roles:
-  - ingress_host
+  - bastion
