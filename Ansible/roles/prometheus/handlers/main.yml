@@ -9,10 +9,10 @@
 
 - name: reload_prometheus
   uri:
-    url: http://prometheus:9090/
+    url: prometheus:9100/metrics
     method: GET
-    status_code: 302
+    status_code: 200
   register: __result
-  until: __result.status == 302
+  until: __result.status == 200
   retries: 120
   delay: 10

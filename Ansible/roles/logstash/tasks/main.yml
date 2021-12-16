@@ -8,6 +8,10 @@
 #    repo: deb https://artifacts.elastic.co/packages/7.x/apt stable main
 #    state: present
 
+- name: Add repo to source list
+  shell: echo "deb https://artifacts.elastic.co/packages/7.x/apt stable main" >> /etc/apt/sources.list.d/logstash.list
+  become: true
+
 - name: Install Logstash
   apt: name=logstash state=present force=true update_cache=yes
 

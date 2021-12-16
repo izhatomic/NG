@@ -9,22 +9,25 @@
 #    state: present
 
 - name: Add repo to source list
-  shell: echo "deb https://artifacts.elastic.co/packages/7.x/apt stable main" >> /etc/apt/sources.list
+  shell: echo "deb https://artifacts.elastic.co/packages/7.x/apt stable main" >> /etc/apt/sources.list.d/kibana.list
   become: true
 
 - name: Install kibana
-  apt: name=kibana state=present force=yes update_cache=yes
+  apt: name=kibana update_cache=yes
+  become: true
 
 - name: Copy config
   template: src=kibanaConf.j2 dest=/etc/kibana/kibana.yml
  
 - name: Force systemd to reread configs
   systemd: daemon_reload=yes
+  become: true
  
 - name: Enable kibana.service
   systemd:
     name: kibana.service
     enabled: yes
+  become: true
  
 - name: Start kibana.service
   systemd: name=kibana.service state=restarted

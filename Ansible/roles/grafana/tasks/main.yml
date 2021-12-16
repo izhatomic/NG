@@ -19,7 +19,7 @@
 #    validate_certs: no
 
 - name: Add repo to source list
-  shell: echo "deb https://packages.grafana.com/oss/deb stable main" >> /etc/apt/sources.list
+  shell: echo "deb https://packages.grafana.com/oss/deb stable main" >> /etc/apt/sources.list.d/grafana.list
   become: true
 
 

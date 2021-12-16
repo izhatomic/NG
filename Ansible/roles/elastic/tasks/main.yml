@@ -9,22 +9,25 @@
 #    state: present
 
 - name: Add repo to source list
-  shell: echo "deb https://artifacts.elastic.co/packages/7.x/apt stable main" >> /etc/apt/sources.list
+  shell: echo "deb https://artifacts.elastic.co/packages/7.x/apt stable main" >> /etc/apt/sources.list.d/elasticsearch.list
   become: true
 
 - name: Install elasticsearch
-  apt: name=elasticsearch state=present update_cache=yes
+  apt: name=elasticsearch update_cache=yes
+  become: true
 
 - name: Copy config
   template: src=elasticsearchConf.j2 dest=/etc/elasticsearch/elasticsearch.yml
 
 - name: Force systemd to reread configs
   systemd: daemon_reload=yes
+  become: true
 
 - name: Enable elasticsearch.service
   systemd:
     name: elasticsearch.service
     enabled: yes
+  become: true
 
 - name: Start elasticsearch.service
   systemd: name=elasticsearch.service state=restarted
