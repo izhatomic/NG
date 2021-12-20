@@ -1,7 +1,0 @@
-users:
-  - name: izhatomic
-    groups: sudo
-    shell: /bin/bash
-    sudo: ['ALL=(ALL) NOPASSWD:ALL']
-    ssh-authorized-keys:
-    - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQC9QX275JBqlHyolvp7/G3zo8ONx9ZFW9oh0ZR8EokNWudYwQrftDseEyZ+MvdfCxO1dAl9CNRwbZvWee7r3NWTKsOv7wOFSf1QEFgCqH4UMr7NIdHgQAYLvDZino18zuelIUwbFn9KfyrLLU+wk7v4b6ocBaifxVGOT5c8qa+++F1lhufrUBvrzeRuruMAi4Xg1cs61kEEU082KyhmZmFbcuNJhUwR5ND4+u88+zw7sFxjqV3jkP+bUxl15InZsw9TDvr0PMjdxphL3QihQ7NgBJmhSUQDz57rJ0vXlIgj2v+YCpakNQU/W+g+CBu5MyQqrEfOdaU4ZwI4tM72biIhTDs8ys7Xgb0LgYc2itRj20l1zwtjxezXOUEwdFVAe0plhWljfUZRojIS8dfJ+g4Rg6Dg26KO1/gDtUjsbroo99RniEu/7m0E4gF4g0C8x1YMQHUy1twBZHfPgOAdQHziVa9u5XE5/JFWvI3PXtJuK9vYbPqDq4yL7XQPUkRjt/s= izhatomic@travelmate

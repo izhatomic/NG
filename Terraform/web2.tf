@@ -29,6 +29,5 @@ resource "yandex_compute_instance" "web2" {
 
   metadata = {
     ssh-keys  = "${var.username}:${file(var.public_key_path)}"
-    user-data = "${file("users.yml")}"
   }
 }
