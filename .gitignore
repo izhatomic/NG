@@ -5,3 +5,4 @@ Terraform/*.tfstate
 Terraform/*.swp
 Terraform/*.tfstate
 Terraform/*.backup
+*travis.yml
