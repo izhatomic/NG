@@ -29,15 +29,6 @@
 - name: Make config for nginxlog-exporter
   template: src=prometheus-nginxlog-exporter.hcl.j2 dest=/etc/prometheus-nginxlog-exporter.hcl
 
-- name: wait for nginx up
-  uri:
-    url: "http://127.0.0.1:80"
-    status_code: 200
-  register: __result
-  until: __result.status == 200
-  retries: 12
-  delay: 10
-
 - name: Restart prometheus-nginxlog-exporter.service
   systemd: name=prometheus-nginxlog-exporter.service state=restarted
   become: true
@@ -50,3 +41,12 @@
   until: __result.status == 200
   retries: 12
   delay: 20
+
+- name: wait for nginx up
+  uri:
+    url: "http://127.0.0.1:80"
+    status_code: 200
+  register: __result
+  until: __result.status == 200
+  retries: 12
+  delay: 10
