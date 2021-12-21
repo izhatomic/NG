@@ -13,10 +13,10 @@
 - name: copy index page to nginx
   template: src=index.j2 dest=/var/www/html/index.html
 
-#- name: take read access for nginx access.log
-#  file:
-#    path: /var/log/nginx/access.log
-#    mode: '0644'
+- name: take read access for nginx access.log
+  file:
+    path: /var/log/nginx/access.log
+    mode: '0644'
 
 - name: Installing nginxlog-exporter
   apt: deb="{{ nginxlog_link }}"

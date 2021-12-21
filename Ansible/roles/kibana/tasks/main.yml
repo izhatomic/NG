@@ -3,11 +3,6 @@
 - name: APT - Add elastic repo key
   apt_key: url="https://artifacts.elastic.co/GPG-KEY-elasticsearch"
 
-#- name: Add Elastic repo into source list
-#  apt_repository:
-#    repo: deb https://artifacts.elastic.co/packages/7.x/apt stable main
-#    state: present
-
 - name: Add repo to source list
   template: src=kibana.list.j2 dest=/etc/apt/sources.list.d/kibana.list
   become: true
