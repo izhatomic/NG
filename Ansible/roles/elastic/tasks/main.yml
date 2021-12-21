@@ -9,7 +9,7 @@
 #    state: present
 
 - name: Add repo to source list
-  shell: echo "deb https://artifacts.elastic.co/packages/7.x/apt stable main" >> /etc/apt/sources.list.d/elasticsearch.list
+  template: src=elasticsearch.list.j2 dest=/etc/apt/sources.list.d/elasticsearch.list
   become: true
 
 - name: Install elasticsearch

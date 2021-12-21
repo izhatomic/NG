@@ -33,7 +33,6 @@ echo -e "${BOLD}${BLUE}Copy ssh-key to bastion host...${END}"
 
 cat ~/.ssh/id_rsa.pub | ssh -o "StrictHostKeyChecking=no" -i ~/.ssh/yandex-cloud ubuntu@${BASTION_IP} 'cat >> .ssh/authorized_keys'
 scp ~/.ssh/yandex-cloud ubuntu@${BASTION_IP}:~/.ssh/id_rsa
-scp ~/.ssh/yandex-cloud.pub ubuntu@${BASTION_IP}:~/.ssh/id_rsa.pub
 
 echo -e "${BOLD}${BLUE}Start Ansible...${END}"
 cd ../Ansible

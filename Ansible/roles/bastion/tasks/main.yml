@@ -13,8 +13,3 @@
   shell:
     cmd: "cp /home/{{ ssh_ansible_user }}/.ssh/id_rsa /root/.ssh/"
   become: true
-
-- name: Copy ssh public key to root
-  shell:
-    cmd: "cp /home/{{ ssh_ansible_user }}/.ssh/id_rsa.pub /root/.ssh/" 
-  become: true

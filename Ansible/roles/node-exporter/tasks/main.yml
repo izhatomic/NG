@@ -18,3 +18,12 @@
 - name: Start prometheus-node-exporter.service
   systemd: name=prometheus-node-exporter.service state=restarted
   become: true
+
+- name: wait for node-exporter up
+  uri:
+    url: "http://127.0.0.1:9100/metrics"
+    status_code: 200
+  register: __result
+  until: __result.status == 200
+  retries: 12 
+  delay: 10

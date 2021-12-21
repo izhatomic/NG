@@ -10,7 +10,7 @@
 #  become: true
 
 - name: Add repo to source list
-  shell: echo "deb https://artifacts.elastic.co/packages/7.x/apt stable main" >> /etc/apt/sources.list.d/filebeat.list
+  template: src=filebeat.list.j2 dest=/etc/apt/sources.list.d/filebeat.list
   become: true
 
 - name: Install filebeat from APT repository
