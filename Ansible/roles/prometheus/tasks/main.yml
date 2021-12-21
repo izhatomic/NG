@@ -13,7 +13,6 @@
     mode: 0644
     owner: root
     group: root
-  notify: restart_prometheus
 
 - name: prometheus configuration file
   template:
