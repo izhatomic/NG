@@ -6,3 +6,4 @@ Terraform/*.swp
 Terraform/*.tfstate
 Terraform/*.backup
 *travis.yml
+Ansible/roles/backup/defaults/main.yml

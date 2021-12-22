@@ -1,0 +1,24 @@
+---
+# tasks file for roles/backup
+- name: install yc
+  shell:
+    cmd: curl https://storage.yandexcloud.net/yandexcloud-yc/install.sh | bash
+  become: true
+
+- name: configure yc - create profile
+  shell: yc config profile create netology-diplom
+  become: true
+
+- name: configure yc - set cloud-id
+  shell: "yc config set cloud-id {{ cloud_id }}"
+  become: true
+
+- name: configure yc - set folder-name
+  shell: "yc config set folder-name {{ folder_name }}"
+  become: true
+
+- name: configure yc - set token
+  shell: "yc config set token {{ token }}"
+  become: true
+
+
