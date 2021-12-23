@@ -4,3 +4,4 @@
   - bastion
   roles:
   - bastion
+  - backup
