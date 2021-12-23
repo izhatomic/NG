@@ -21,4 +21,20 @@
   shell: "yc config set token {{ token }}"
   become: true
 
+- name: copy backup script
+  template: src=backup-netology.sh dst=/usr/bin/
+  become: true
 
+- name: make script exec
+  file:
+    path: /usr/bin/backup-netology.sh
+    mode: '0770'
+  become: true
+
+- name: make cron task
+  cron:
+    name: "Daily snapshot"
+    job: /usr/bin/backup-netology.sh
+    minute: "0"
+    hour: "0"
+  become: true
