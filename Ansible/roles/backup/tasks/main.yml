@@ -5,6 +5,12 @@
     cmd: curl https://storage.yandexcloud.net/yandexcloud-yc/install.sh | bash
   become: true
 
+- name: init yc
+  shell:
+    cmd: source "/home/ubuntu/.bashrc"
+#    cmd: source "/root/.bashrc"
+  become: true
+
 - name: configure yc - create profile
   shell: yc config profile create netology-diplom
   become: true
@@ -36,5 +42,5 @@
     name: "Daily snapshot"
     job: /usr/bin/backup-netology.sh
     minute: "0"
-    hour: "0"
+    hour: "21"
   become: true
