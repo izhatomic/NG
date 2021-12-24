@@ -3,38 +3,22 @@
 - name: install yc
   shell:
     cmd: curl https://storage.yandexcloud.net/yandexcloud-yc/install.sh | bash
-  become: true
 
-- name: init yc
+- name: configure yc
   shell:
-    cmd: source "/home/ubuntu/.bashrc"
-#    cmd: source "/root/.bashrc"
-  become: true
-
-- name: configure yc - create profile
-  shell: yc config profile create netology-diplom
-  become: true
-
-- name: configure yc - set cloud-id
-  shell: "yc config set cloud-id {{ cloud_id }}"
-  become: true
-
-- name: configure yc - set folder-name
-  shell: "yc config set folder-name {{ folder_name }}"
-  become: true
-
-- name: configure yc - set token
-  shell: "yc config set token {{ token }}"
-  become: true
+    cmd: |
+      source "/home/ubuntu/.bashrc"
+      yc config profile create netology-diplom
+      exit 0
 
 - name: copy backup script
-  template: src=backup-netology.sh dst=/usr/bin/
+  template: src=backup-netology.sh.j2 dest=/usr/bin/backup-netology.sh
   become: true
 
 - name: make script exec
   file:
     path: /usr/bin/backup-netology.sh
-    mode: '0770'
+    mode: '0771'
   become: true
 
 - name: make cron task
@@ -42,5 +26,4 @@
     name: "Daily snapshot"
     job: /usr/bin/backup-netology.sh
     minute: "0"
-    hour: "21"
-  become: true
+    hour: "0"

@@ -1,11 +1,18 @@
 #!/bin/bash
 
+PATH="${PATH}:{{ path_to_yc }}"
+yc config set cloud-id {{ cloud_id }}
+yc config set folder-name {{ folder_name }}
+yc config set token {{ token }}
+
 # Делаем snapshot
 yc compute instance list | while read line ; do
   vm_id=$(echo $line | awk '{print $2}')
 
   #Фильтруем пустые строки и разметку
+{% raw %}
   if [[ ${#vm_id} -lt 10 ]]; then
+{% endraw %}
     continue
   fi
 
@@ -21,7 +28,9 @@ yc compute snapshot list | while read line; do
   snap_name=$(echo $line | awk '{print $4}')
 
   #Фильтруем пустые строки и разметку
+{% raw %}
   if [[ ${#snap_name} -lt 10 ]]; then
+{% endraw %}
     continue
   fi
 
@@ -39,4 +48,5 @@ yc compute snapshot list | while read line; do
   if [[ $dif -gt 7 ]]; then
     yc compute snapshot delete --id $snap_id
   fi
-done
+done;
+

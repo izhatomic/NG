@@ -3,3 +3,4 @@
 cloud_id: b1gbfmcnli0qbnh558or8
 folder_name: default
 token: AQAAAAABZgLiAATuwZCa5yregkOCjtEhFlIVi1SU
+path_to_yc: "/home/{{ ssh_ansible_user }}/yandex-cloud/bin"
