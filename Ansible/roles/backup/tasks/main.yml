@@ -7,23 +7,23 @@
 - name: configure yc
   shell:
     cmd: |
-      source "/home/ubuntu/.bashrc"
+      source "/home/{{ ssh_ansible_user }}/.bashrc"
       yc config profile create netology-diplom
       exit 0
 
 - name: copy backup script
-  template: src=backup-netology.sh.j2 dest=/usr/bin/backup-netology.sh
+  template: src=backup-netology.sh.j2 dest="/home/{{ ssh_ansible_user }}/backup-netology.sh"
   become: true
 
 - name: make script exec
   file:
-    path: /usr/bin/backup-netology.sh
-    mode: '0771'
+    path: "/home/{{ ssh_ansible_user }}/backup-netology.sh"
+    mode: '0750'
   become: true
 
 - name: make cron task
   cron:
     name: "Daily snapshot"
-    job: /usr/bin/backup-netology.sh
-    minute: "0"
-    hour: "0"
+    job: "/home/{{ ssh_ansible_user }}/backup-netology.sh"
+    minute: "30"
+    hour: "13"
