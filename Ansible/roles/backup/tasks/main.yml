@@ -24,5 +24,5 @@
   cron:
     name: "Daily snapshot"
     job: "/home/{{ ssh_ansible_user }}/backup-netology.sh"
-    minute: "30"
-    hour: "13"
+    minute: "0"
+    hour: "0"
