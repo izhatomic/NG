@@ -13,7 +13,6 @@
 
 - name: copy backup script
   template: src=backup-netology.sh.j2 dest="/home/{{ ssh_ansible_user }}/backup-netology.sh"
-  become: true
 
 - name: make script exec
   file:
